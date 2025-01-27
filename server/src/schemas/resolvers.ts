@@ -44,12 +44,10 @@ const resolvers = {
         login: async (_parent: any, { email, password }: LoginUserArgs) => {
             // Find a user with the provided email
             const user = await User.findOne({ email });
-            console.log('Login resolver hit with email:', email);
             // If no user is found, throw an AuthenticationError
       if (!user) {
         throw new AuthenticationError('Could not authenticate user.');
       }
-      console.log('User found:', user);
       // Check if the provided password is correct
       const correctPw = await user.isCorrectPassword(password);
     
